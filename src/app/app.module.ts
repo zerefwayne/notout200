@@ -5,10 +5,14 @@ import { AppComponent } from './app.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WelcomeComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
