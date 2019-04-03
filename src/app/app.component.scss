@@ -1,11 +1,17 @@
 @import "../styles";
 
 .heading{
-  font-size: 6em;
+  font-size: 6rem;
   color: $color3;
 }
 
 .subheading{
-  font-size: 2em;
+  font-size: 2rem;
   color: $color4;
+}
+
+.continue-button{
+  color: $color2;
+  background: $color4;
+  outline: none;
 }
