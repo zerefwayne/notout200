@@ -1,10 +1,12 @@
-import {Directive, ElementRef, OnInit} from '@angular/core';
+import {Directive, ElementRef, Input, OnInit} from '@angular/core';
 import Chart from 'chart.js';
 
 @Directive({
   selector: '[pieChart]'
 })
 export class PieChartDirective implements OnInit{
+
+  @Input() pieChartType: 'pie' | 'doughnut' = 'pie';
 
   constructor(private elementRef: ElementRef) { }
 
@@ -16,7 +18,7 @@ export class PieChartDirective implements OnInit{
   ngOnInit(): void {
 
     this.elementRef = new Chart(this.elementRef.nativeElement, {
-      type: 'doughnut',
+      type: this.pieChartType,
       data: {
         labels: this.labels,
         datasets: [
