@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-welcome',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
+  totalRuns: number = 0;
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+
+    console.log(this.dataService.getData());
+
   }
 
 }
