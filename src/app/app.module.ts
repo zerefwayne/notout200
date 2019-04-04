@@ -13,6 +13,7 @@ import { RadarChartDirective } from './directives/radar-chart.directive';
 import { PieChartDirective } from './directives/pie-chart.directive';
 import { BubbleChartDirective } from './directives/bubble-chart.directive';
 import { TestComponent } from './test/test.component';
+import {DataService} from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { TestComponent } from './test/test.component';
     MatInputModule,
     MatFormFieldModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
