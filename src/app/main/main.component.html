@@ -1,9 +1,30 @@
 <section>
-  <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center" style="margin-top: 10rem;">
+  <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center" style=" font-size: 2rem; text-align: center; margin: 10rem 0;">
 
-    <span style="font-size: 3rem;">Total Runs: {{ getTotalRuns() }}</span>
-    <span style="font-size: 3rem;">Total Wickets: {{ getTotalWickets() }}</span>
+    <mat-card>
+      <mat-card-title>Total Runs</mat-card-title>
+      <mat-card-content style="font-size: 2rem;">
+        {{ getTotalRuns() }}
+      </mat-card-content>
+    </mat-card>
 
+    <mat-card>
+      <mat-card-title>Total Wickets</mat-card-title>
+      <mat-card-content style="font-size: 2rem;">
+        {{ getTotalWickets() }}
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Countries Played Against</mat-card-title>
+      <mat-card-content style="font-size: 2rem;">
+
+        <mat-list role="list" >
+          <mat-list-item role="listitem" *ngFor="let country of getCountries()">{{ country | titlecase }}</mat-list-item>
+        </mat-list>
+
+      </mat-card-content>
+    </mat-card>
 
   </div>
 </section>

@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900');
 
-html, body { height: 100%;}
-html { font-size: 62.5%; }
-body { margin: 0; font-family: 'Rubik', sans-serif;}
-
 $color1: rgba(12, 9, 13, 1); //black
 $color2: rgba(255, 234, 238, 1); //white
 $color3: rgba(0, 123, 213, 1); //blue
 $color4: rgba(243, 87, 42, 1); //orange
 $color5: rgba(84, 159, 147, 1); //green
+
+html, body { height: 100%;}
+html { font-size: 62.5%; }
+body { margin: 0; font-family: 'Rubik', sans-serif; background-color: $color3;}
