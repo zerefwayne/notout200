@@ -1,3 +1,25 @@
-<p>
-  viz works!
-</p>
+<section fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center" style=" font-size: 2rem; margin: 10rem 0;">
+
+  <header style="padding: 4rem 0;" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center center">
+
+    <h1>Visualisation</h1>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <button mat-raised-button routerLink="/"><mat-icon>home</mat-icon>Home</button>
+      <button mat-raised-button routerLink="/stats"><mat-icon>home</mat-icon>Stats</button>
+    </div>
+
+  </header>
+
+
+  <!--Runs By Year-->
+  <section style="width: 100%;">
+
+    <canvas barChart></canvas>
+    <h1 style="text-align: center;">Runs Scored Per Innings</h1>
+
+  </section>
+
+
+
+</section>

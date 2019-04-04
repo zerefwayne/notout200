@@ -1,4 +1,3 @@
-
 <section fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center" style=" font-size: 2rem; margin: 10rem 0;">
 
     <header style="padding: 4rem 0;" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center center">
@@ -8,24 +7,25 @@
       <button mat-raised-button routerLink="/viz"><mat-icon>home</mat-icon>Viz</button>
       </div>
     </header>
+
       <div style="display: flex; width: 100%;">
       <mat-card class="short-stat">
         <mat-card-title>Total Runs</mat-card-title>
-        <mat-card-content style="font-size: 2rem;">
+        <mat-card-content>
           {{ getTotalRuns() }}
         </mat-card-content>
       </mat-card>
 
       <mat-card class="short-stat">
-        <mat-card-title>Career Batting Average</mat-card-title>
-        <mat-card-content style="font-size: 2rem;">
+        <mat-card-title>Career Average</mat-card-title>
+        <mat-card-content>
           {{ getBattingAverage() }}
         </mat-card-content>
       </mat-card>
 
       <mat-card class="short-stat">
         <mat-card-title>Total Wickets</mat-card-title>
-        <mat-card-content style="font-size: 2rem;">
+        <mat-card-content>
           {{ getTotalWickets() }}
         </mat-card-content>
       </mat-card>
@@ -34,20 +34,56 @@
     <div style="display: flex; width: 100%;">
       <mat-card class="short-stat">
         <mat-card-title>Runs in 1st Innings</mat-card-title>
-        <mat-card-content style="font-size: 2rem;">
+        <mat-card-content>
           {{ getRunsByInnings()['1st'] }}
         </mat-card-content>
       </mat-card>
 
       <mat-card class="short-stat">
         <mat-card-title>Runs in 2nd Innings</mat-card-title>
-        <mat-card-content style="font-size: 2rem;">
+        <mat-card-content>
           {{ getRunsByInnings()['2nd'] }}
         </mat-card-content>
       </mat-card>
 
 
     </div>
+
+  <div style="display: flex; width: 100%;">
+    <mat-card class="short-stat">
+      <mat-card-title>1989-1995</mat-card-title>
+      <mat-card-content>
+        Runs: {{ getStatsBetween(1989, 1995).runs }}
+        Average: {{ getStatsBetween(1989, 1995).average }}
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="short-stat">
+      <mat-card-title>1996-2000</mat-card-title>
+      <mat-card-content>
+        Runs: {{ getStatsBetween(1996, 2000).runs }}
+        Average: {{ getStatsBetween(1996, 2000).average }}
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="short-stat">
+      <mat-card-title>2001-2006</mat-card-title>
+      <mat-card-content>
+        Runs: {{ getStatsBetween(2001, 2006).runs }}
+        Average: {{ getStatsBetween(2001, 2006).average }}
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="short-stat">
+      <mat-card-title>2007-2012</mat-card-title>
+      <mat-card-content>
+        Runs: {{ getStatsBetween(2007, 2012).runs }}
+        Average: {{ getStatsBetween(2007, 2012).average }}
+      </mat-card-content>
+    </mat-card>
+
+
+  </div>
 
     <mat-card style="padding: 3rem 0;">
       <mat-card-title style="padding: 0 2rem;">Performance by country</mat-card-title>

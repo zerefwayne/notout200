@@ -1,5 +1,6 @@
 import {Directive, ElementRef, OnInit} from '@angular/core';
 import Chart from 'chart.js';
+import {DataService} from '../services/data.service';
 
 @Directive({
   selector: '[barChart]'
@@ -7,32 +8,25 @@ import Chart from 'chart.js';
 
 export class BarChartDirective implements OnInit{
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef, private dataService: DataService) { }
 
-  labels: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-  data1: number[] = [12, 23, 5, 67, 56, 12];
-  data2: number[] = [24, 1, 15, 100, 15, 56];
+  async ngOnInit(){
 
-  ngOnInit(){
+    const requiredData = await this.dataService.getAllInnings();
 
     this.elementRef = new Chart(this.elementRef.nativeElement, {
 
-      type: 'horizontalBar',
+      type: 'bar',
       data: {
-        labels: this.labels,
+        labels: requiredData.labels,
         datasets: [
           {
-            data: this.data1,
-            fill: false,
-            backgroundColor: '#007BD5',
-            label: 'Data1'
-          },
-          {
-            data: this.data2,
-            fill: false,
-            backgroundColor: '#F3572A',
-            label: 'Data2'
+            data: requiredData.data,
+            backgroundColor: this.getColors(requiredData.data),
+            label: 'Runs'
+
           }
+
         ]
       },
       options: {
@@ -43,4 +37,27 @@ export class BarChartDirective implements OnInit{
 
   }
 
+  getColors(scores: number[]): string[] {
+
+    const colors: string[] = [];
+
+    scores.forEach(score => {
+
+      if(score >= 200){
+        colors.push('green')
+      } else if (score >=150) {
+        colors.push('olive')
+      } else if (score >= 100) {
+        colors.push('yellow')
+      } else if (score >= 50){
+        colors.push('blue')
+      } else {
+        colors.push('#AAAAAA')
+      }
+
+    });
+
+    return colors;
+
+  }
 }

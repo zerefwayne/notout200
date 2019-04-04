@@ -2,19 +2,20 @@ import {Injectable, OnInit} from '@angular/core';
 import * as data from '../../assets/sachin-odi.json';
 import * as _ from 'lodash';
 import {Inning} from './inning.model';
+import * as moment from 'moment';
+import {Moment} from 'moment';
+import {ɵEmptyOutletComponent} from '@angular/router';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService implements OnInit{
+export class DataService{
 
   constructor() { }
 
   // @ts-ignore
   private inningsData: Inning[] = data.default;
-
-  ngOnInit(): void {}
 
   getData() {
     return this.inningsData;
@@ -130,6 +131,61 @@ export class DataService implements OnInit{
 
   }
 
+  setMomentDates(){
+    this.inningsData.forEach((inning) => {
+      inning.moment = moment(inning.date, 'DD MMM YYYY');
+    });
+  }
+
+  getStatsBetween(start: Moment, end: Moment) {
+
+    let runs: number = 0;
+    let innings: number = 0;
+
+    this.inningsData.forEach((inning: Inning) => {
+      if(inning.did_not_bat === 0){
+
+        if( inning.moment.isBetween(start, end)){
+          runs += inning.batting_score;
+
+          if(inning.notout === 0){
+            innings++;
+          }
+
+        }
+
+      }
+    });
+
+    let average: number = _.round(runs / innings, 2);
+
+    return {average: average, runs: runs};
+  }
+
+  getAllInnings(): {data: number[], labels: number[], average: number} {
+
+    let result = [];
+
+    this.inningsData.forEach((inning: Inning, index: number) => {
+
+      if(inning.did_not_bat === 0){
+
+        result.push({
+          score: inning.batting_score,
+          index: index
+        });
+
+      }
+
+    });
+
+    let scoreArray: number[] = result.map((item) => {if(item){return item.score}});
+    let indexArray: number[] = result.map((item) => {if(item){return item.index}});
+
+    let average = this.getAverage();
+
+    return {data: scoreArray, labels: indexArray, average: average};
+  }
 
 
 

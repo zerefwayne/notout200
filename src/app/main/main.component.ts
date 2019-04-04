@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-main',
@@ -16,6 +17,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
 
     this.rByOppDataSource = this.dataService.getRecordByOppositions();
+    this.dataService.setMomentDates();
 
   }
 
@@ -45,6 +47,14 @@ export class MainComponent implements OnInit {
 
   }
 
+  getStatsBetween(start: number, end: number) {
+
+    const startMoment = moment(start, 'YYYY').startOf('year');
+    const endMoment = moment(end, 'YYYY').endOf('year');
+
+    return this.dataService.getStatsBetween(startMoment, endMoment);
+
+  }
 
 
 
