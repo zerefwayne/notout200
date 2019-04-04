@@ -1,3 +1,5 @@
+import {Moment} from 'moment';
+
 export class Inning {
 
   batting_score: number;
@@ -10,6 +12,7 @@ export class Inning {
   opposition: string;
   ground: string;
   date: string;
+  moment?: Moment;
   match_result: string;
   result_margin: string;
   batting_innings: number;

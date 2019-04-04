@@ -1,30 +1,95 @@
-<section>
-  <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center" style=" font-size: 2rem; text-align: center; margin: 10rem 0;">
 
-    <mat-card>
-      <mat-card-title>Total Runs</mat-card-title>
+<section fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center" style=" font-size: 2rem; margin: 10rem 0;">
+
+    <header style="padding: 4rem 0;" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <h1>Stats</h1>
+      <div fxLayout="row" fxLayoutGap="10px">
+      <button mat-raised-button routerLink="/"><mat-icon>home</mat-icon>Home</button>
+      <button mat-raised-button routerLink="/viz"><mat-icon>home</mat-icon>Viz</button>
+      </div>
+    </header>
+      <div style="display: flex; width: 100%;">
+      <mat-card class="short-stat">
+        <mat-card-title>Total Runs</mat-card-title>
+        <mat-card-content style="font-size: 2rem;">
+          {{ getTotalRuns() }}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="short-stat">
+        <mat-card-title>Career Batting Average</mat-card-title>
+        <mat-card-content style="font-size: 2rem;">
+          {{ getBattingAverage() }}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="short-stat">
+        <mat-card-title>Total Wickets</mat-card-title>
+        <mat-card-content style="font-size: 2rem;">
+          {{ getTotalWickets() }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div style="display: flex; width: 100%;">
+      <mat-card class="short-stat">
+        <mat-card-title>Runs in 1st Innings</mat-card-title>
+        <mat-card-content style="font-size: 2rem;">
+          {{ getRunsByInnings()['1st'] }}
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="short-stat">
+        <mat-card-title>Runs in 2nd Innings</mat-card-title>
+        <mat-card-content style="font-size: 2rem;">
+          {{ getRunsByInnings()['2nd'] }}
+        </mat-card-content>
+      </mat-card>
+
+
+    </div>
+
+    <mat-card style="padding: 3rem 0;">
+      <mat-card-title style="padding: 0 2rem;">Performance by country</mat-card-title>
       <mat-card-content style="font-size: 2rem;">
-        {{ getTotalRuns() }}
+
+        <table mat-table [dataSource]="rByOppDataSource" class="mat-elevation-z8 container-fluid" style="box-shadow: none;">
+
+          <ng-container matColumnDef="opposition">
+            <th mat-header-cell *matHeaderCellDef> Opposition </th>
+            <td mat-cell *matCellDef="let record"> {{record.opposition | titlecase}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="innings">
+            <th mat-header-cell *matHeaderCellDef> Innings </th>
+            <td mat-cell *matCellDef="let record"> {{record.innings}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="not_outs">
+            <th mat-header-cell *matHeaderCellDef> Not Outs </th>
+            <td mat-cell *matCellDef="let record"> {{record.not_outs}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="runs">
+            <th mat-header-cell *matHeaderCellDef> Runs </th>
+            <td mat-cell *matCellDef="let record"> {{record.runs}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="average">
+            <th mat-header-cell *matHeaderCellDef> Average </th>
+            <td mat-cell *matCellDef="let record"> {{record.average}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="wickets">
+            <th mat-header-cell *matHeaderCellDef> Wickets </th>
+            <td mat-cell *matCellDef="let record"> {{record.wickets}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="rByOppColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: rByOppColumns;"></tr>
+        </table>
+
       </mat-card-content>
     </mat-card>
 
-    <mat-card>
-      <mat-card-title>Total Wickets</mat-card-title>
-      <mat-card-content style="font-size: 2rem;">
-        {{ getTotalWickets() }}
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card>
-      <mat-card-title>Countries Played Against</mat-card-title>
-      <mat-card-content style="font-size: 2rem;">
-
-        <mat-list role="list" >
-          <mat-list-item role="listitem" *ngFor="let country of getCountries()">{{ country | titlecase }}</mat-list-item>
-        </mat-list>
-
-      </mat-card-content>
-    </mat-card>
-
-  </div>
 </section>

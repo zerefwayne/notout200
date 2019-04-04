@@ -14,6 +14,7 @@ import {BubbleChartDirective} from './directives/bubble-chart.directive';
 import {TestComponent} from './test/test.component';
 import {DataService} from './services/data.service';
 import {MaterialModule} from './material.module';
+import { VizComponent } from './viz/viz.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {MaterialModule} from './material.module';
     RadarChartDirective,
     PieChartDirective,
     BubbleChartDirective,
-    TestComponent
+    TestComponent,
+    VizComponent
   ],
   imports: [
     BrowserModule,

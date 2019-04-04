@@ -7,8 +7,9 @@
 
   <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center" style="margin-top: 20px">
 
-  <button mat-stroked-button color="primary" routerLink="/stats" class="continue-button">Continue</button>
-  <button mat-stroked-button color="accent" routerLink="/test">Test</button>
+  <button mat-stroked-button color="primary" routerLink="/stats">Stats</button>
+    <button mat-stroked-button color="primary" routerLink="/viz">Visualizations</button>
+    <button mat-stroked-button color="accent" [disabled]="true" routerLink="/test">Test</button>
 
   </div>
 

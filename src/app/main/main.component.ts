@@ -8,10 +8,16 @@ import {DataService} from '../services/data.service';
 })
 export class MainComponent implements OnInit {
 
+  rByOppColumns: string[] = ['opposition', 'innings', 'not_outs', 'runs', 'average', 'wickets'];
+  rByOppDataSource = [];
 
   constructor(private dataService: DataService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.rByOppDataSource = this.dataService.getRecordByOppositions();
+
+  }
 
   getTotalRuns(): number{
     return this.dataService.getTotalRuns();
@@ -26,5 +32,20 @@ export class MainComponent implements OnInit {
     return this.dataService.getAllCountriesPlayedAgainst();
 
   }
+
+  getBattingAverage(): number {
+
+    return this.dataService.getAverage();
+
+  }
+
+  getRunsByInnings(): {'1st': number, '2nd': number} {
+
+    return this.dataService.getRunsByInnings();
+
+  }
+
+
+
 
 }
