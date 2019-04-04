@@ -9,6 +9,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { MainComponent } from './main/main.component';
 import { LineChartDirective } from './directives/line-chart.directive';
 import { BarChartDirective } from './directives/bar-chart.directive';
+import { RadarChartDirective } from './directives/radar-chart.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { BarChartDirective } from './directives/bar-chart.directive';
     WelcomeComponent,
     MainComponent,
     BarChartDirective,
-    LineChartDirective
+    LineChartDirective,
+    RadarChartDirective
   ],
   imports: [
     BrowserModule,
