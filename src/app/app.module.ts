@@ -12,6 +12,7 @@ import { BarChartDirective } from './directives/bar-chart.directive';
 import { RadarChartDirective } from './directives/radar-chart.directive';
 import { PieChartDirective } from './directives/pie-chart.directive';
 import { BubbleChartDirective } from './directives/bubble-chart.directive';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BubbleChartDirective } from './directives/bubble-chart.directive';
     LineChartDirective,
     RadarChartDirective,
     PieChartDirective,
-    BubbleChartDirective
+    BubbleChartDirective,
+    TestComponent
   ],
   imports: [
     BrowserModule,
