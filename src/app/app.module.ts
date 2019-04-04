@@ -7,14 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { MainComponent } from './main/main.component';
-import { BarChartDirective } from './bar-chart.directive';
+import { LineChartDirective } from './directives/line-chart.directive';
+import { BarChartDirective } from './directives/bar-chart.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     MainComponent,
-    BarChartDirective
+    BarChartDirective,
+    LineChartDirective
   ],
   imports: [
     BrowserModule,
