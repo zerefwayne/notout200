@@ -11,10 +11,16 @@ export class MainComponent implements OnInit {
 
   constructor(private dataService: DataService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
 
+  getTotalRuns(): number{
 
+    return this.dataService.getTotalRuns();
 
+  }
+
+  getTotalWickets(): number {
+    return this.dataService.getTotalWickets();
   }
 
 }
