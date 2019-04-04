@@ -10,6 +10,7 @@ import { MainComponent } from './main/main.component';
 import { LineChartDirective } from './directives/line-chart.directive';
 import { BarChartDirective } from './directives/bar-chart.directive';
 import { RadarChartDirective } from './directives/radar-chart.directive';
+import { PieChartDirective } from './directives/pie-chart.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RadarChartDirective } from './directives/radar-chart.directive';
     MainComponent,
     BarChartDirective,
     LineChartDirective,
-    RadarChartDirective
+    RadarChartDirective,
+    PieChartDirective
   ],
   imports: [
     BrowserModule,
