@@ -4,7 +4,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.sass']
+  styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
 
