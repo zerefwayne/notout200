@@ -12,6 +12,8 @@ import { BattingComponent } from './screens/batting/batting.component';
 import { BowlingComponent } from './screens/bowling/bowling.component';
 import { WorldcupComponent } from './screens/worldcup/worldcup.component';
 import { GlobalComponent } from './screens/global/global.component';
+import { StatTwoComponent } from './components/stat-two/stat-two.component';
+import { StatOneComponent } from './components/stat-one/stat-one.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { GlobalComponent } from './screens/global/global.component';
     BowlingComponent,
     WorldcupComponent,
     GlobalComponent,
+    StatTwoComponent,
+    StatOneComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,24 @@
 <header class="page-header">
-  Worldcup Maestro
+  World Cup Maestro
 </header>
-<section class="section first">
+
+<section class="section">
+
+  <section class="section--overall" fxLayout="row">
+
+  <div fxLayout="column" fxLayoutGap="2rem" fxFlex="35">
+
+    <app-stat-two [title]="'Total Innings'" [value]="overall.innings"></app-stat-two>
+    <app-stat-two [title]="'Total Runs'" [value]="overall.runs"></app-stat-two>
+    <app-stat-two [title]="'Average'" [value]="overall.average"></app-stat-two>
+
+  </div>
+
+  <div fxFlex style="background-color: #AAAAAA;">
 
 
+  </div>
 
+  </section>
 
 </section>

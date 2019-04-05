@@ -1,10 +1,10 @@
-<mat-drawer-container class="app-container">
-  <mat-drawer mode="side" opened class="app-sidenav">
+<mat-drawer-container class="app-container" fxLayout="row">
+  <mat-drawer mode="side" opened class="app-sidenav" fxFlex="20">
 
     <app-sidenav></app-sidenav>
 
   </mat-drawer>
-  <mat-drawer-content class="app-content">
+  <mat-drawer-content class="app-content" fxFlex>
 
     <router-outlet></router-outlet>
 
