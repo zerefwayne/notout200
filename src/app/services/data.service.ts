@@ -45,6 +45,17 @@ export class DataService {
 
   }
 
+  generateRandomColor(): string {
+
+      let letters = '123456789ABCDE';
+
+      let a =  letters[Math.floor(Math.random() * 14)];
+      let b = letters[Math.floor(Math.random() * 14)];
+
+      return '#'+a+b+a+b+a+b;
+
+  }
+
   getCountryCodes(location: string) {
 
     return this.http.get(encodeURI('https://api.opencagedata.com/geocode/v1/json?q=' + location + '&key=7d78dd8a496a47628854cce774400e74&pretty=1'));
