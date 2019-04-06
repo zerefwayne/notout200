@@ -15,6 +15,8 @@ export class WorldcupComponent implements OnInit {
 
   @ViewChild('overallInningsChart') overallChart: ElementRef;
   @ViewChild('runsByResultChart') runsByResultChart: ElementRef;
+  @ViewChild('centuriesByResultChart') centuriesByResultChart: ElementRef;
+  @ViewChild('runsByInningsChart') runsByInningsChart: ElementRef;
 
   worldCupDates = {
     "1992": {
@@ -101,8 +103,9 @@ export class WorldcupComponent implements OnInit {
     this.overall.average = _.round(this.overall.runs / (this.overall.innings - this.overall.not_outs), 2);
 
     this.generateOverallInningsChart();
-
     this.generateRunsByResultChart();
+    this.generateCenturiesByResultChart();
+    //this.generateRunsByInningsChart();
 
   }
 
@@ -130,7 +133,7 @@ export class WorldcupComponent implements OnInit {
                 colors.colorb,
                 colors.colorb,
                 colors.colorb,
-                colors.colorr,
+                colors.colorp,
                 colors.colorb,
                 colors.colory,
               ]
@@ -173,7 +176,7 @@ export class WorldcupComponent implements OnInit {
 
       type: 'doughnut',
       data: {
-        labels: ['Win', 'Loss', 'No Result'],
+        labels: ['Win', 'Loss', 'Tied/NR'],
         datasets: [
           {
             label: 'Runs scored',
@@ -196,6 +199,104 @@ export class WorldcupComponent implements OnInit {
 
   }
 
+  generateCenturiesByResultChart() {
+
+    const centuries_vs_result = [0, 0, 0]; //0 = win //1 = loss //2= n/r
+
+    this.overall.inningsObjects.forEach((inning: Inning) => {
+
+      if(inning.batting_score >= 100) {
+
+        if (inning.match_result == 'won') {
+
+          centuries_vs_result[0] += 1;
+
+        } else if (inning.match_result == 'lost') {
+
+          centuries_vs_result[1] += 1;
+
+        } else {
+          centuries_vs_result[2] += 1;
+        }
+
+      }
+
+    });
+
+    this.centuriesByResultChart = new Chart(this.centuriesByResultChart.nativeElement, {
+
+      type: 'doughnut',
+      data: {
+        labels: ['Win', 'Loss', 'Tied/NR'],
+        datasets: [
+          {
+            label: 'Runs scored',
+            data: centuries_vs_result,
+            backgroundColor: [
+              colors.colory,
+              colors.colorr,
+              colors.colorb
+            ]
+          }
+        ]
+      },
+      options: {
+        legend: {
+          display: true
+        }
+      }
+
+    });
+
+  }
+
+  generateRunsByInningsChart() {
+
+    const runs_by_innings = [0, 0]; //0 = 1st 1 = 2nd
+
+    this.overall.inningsObjects.forEach((inning: Inning) => {
+
+      if(inning.match_result === 'won') {
+
+        if (inning.batting_innings == 1) {
+
+          runs_by_innings[0] += inning.batting_score;
+
+        } else if (inning.batting_innings == 2) {
+
+          runs_by_innings[1] += inning.batting_score;
+
+        }
+
+      }
+
+    });
+
+    this.runsByInningsChart= new Chart(this.runsByInningsChart.nativeElement, {
+
+      type: 'doughnut',
+      data: {
+        labels: ['1st', '2nd'],
+        datasets: [
+          {
+            label: 'Runs scored',
+            data: runs_by_innings,
+            backgroundColor: [
+              colors.colory,
+              colors.colorr,
+            ]
+          }
+        ]
+      },
+      options: {
+        legend: {
+          display: true
+        }
+      }
+
+    });
+
+  }
 
 
 }
