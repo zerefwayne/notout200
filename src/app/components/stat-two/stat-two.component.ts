@@ -9,6 +9,7 @@ export class StatTwoComponent implements OnInit {
 
   @Input() title: string = '';
   @Input() value: number = 0;
+  @Input() direction: string = 'left';
 
   constructor() { }
 

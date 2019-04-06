@@ -14,6 +14,7 @@ import colors from '../../shared/colors.model';
 export class WorldcupComponent implements OnInit {
 
   @ViewChild('overallInningsChart') overallChart: ElementRef;
+  @ViewChild('runsByResultChart') runsByResultChart: ElementRef;
 
   worldCupDates = {
     "1992": {
@@ -101,6 +102,8 @@ export class WorldcupComponent implements OnInit {
 
     this.generateOverallInningsChart();
 
+    this.generateRunsByResultChart();
+
   }
 
   generateOverallInningsChart() {
@@ -127,17 +130,69 @@ export class WorldcupComponent implements OnInit {
                 colors.colorb,
                 colors.colorb,
                 colors.colorb,
-                colors.colorb,
+                colors.colorr,
                 colors.colorb,
                 colors.colory,
               ]
             }
           ]
+        },
+        options: {
+          legend: {
+            display: true
+          }
         }
 
       });
 
 
+
+  }
+
+  generateRunsByResultChart() {
+
+    const runs_vs_result = [0, 0, 0]; //0 = win //1 = loss //2= n/r
+
+    this.overall.inningsObjects.forEach((inning: Inning) => {
+
+      if(inning.match_result == 'won'){
+
+        runs_vs_result[0] += inning.batting_score;
+
+      } else if (inning.match_result == 'lost') {
+
+        runs_vs_result[1] += inning.batting_score;
+
+      } else {
+        runs_vs_result[2] += inning.batting_score;
+      }
+
+    });
+
+    this.runsByResultChart = new Chart(this.runsByResultChart.nativeElement, {
+
+      type: 'doughnut',
+      data: {
+        labels: ['Win', 'Loss', 'No Result'],
+        datasets: [
+          {
+            label: 'Runs scored',
+            data: runs_vs_result,
+            backgroundColor: [
+              colors.colory,
+              colors.colorr,
+              colors.colorb
+            ]
+          }
+        ]
+      },
+      options: {
+        legend: {
+          display: true
+        }
+      }
+
+    });
 
   }
 

@@ -1,12 +1,18 @@
-<mat-drawer-container class="app-container" fxLayout="row">
-  <mat-drawer mode="side" opened class="app-sidenav" fxFlex="20">
+  <mat-sidenav-container class="app-container" fxLayout="row">
 
-    <app-sidenav></app-sidenav>
+    <mat-sidenav mode="side" [fixedInViewport]="true" [fixedBottomGap]="0" [fixedTopGap]="0"
+    opened fxFlex="0 0 20">
 
-  </mat-drawer>
-  <mat-drawer-content class="app-content" fxFlex="80">
+      <app-sidenav></app-sidenav>
 
-    <router-outlet></router-outlet>
+    </mat-sidenav>
 
-  </mat-drawer-content>
-</mat-drawer-container>
+    <mat-sidenav-content fxFlex="0 0 80" class="app-content">
+
+
+      <router-outlet></router-outlet>
+
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>

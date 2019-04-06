@@ -1,4 +1,4 @@
-<div fxLayout="column">
+<div fxLayout="column" [fxLayoutAlign]="direction === 'left' ? 'center flex-start' : 'center flex-end'">
   <div class="stat-title">
     {{ title }}
   </div>
