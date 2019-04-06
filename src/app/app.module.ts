@@ -14,7 +14,7 @@ import { WorldcupComponent } from './screens/worldcup/worldcup.component';
 import { GlobalComponent } from './screens/global/global.component';
 import { StatTwoComponent } from './components/stat-two/stat-two.component';
 import { StatOneComponent } from './components/stat-one/stat-one.component';
-
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { StatOneComponent } from './components/stat-one/stat-one.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,

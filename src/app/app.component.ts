@@ -12,6 +12,8 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.dataService.setMoments();
+    //this.dataService.setCountryCodes();
+
   }
 
 

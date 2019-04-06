@@ -25,6 +25,7 @@
     "@types/d3": "^5.7.2",
     "@types/jquery": "^3.3.29",
     "@types/lodash": "^4.14.123",
+    "angular2-json2csv": "^1.1.2",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "core-js": "^2.5.4",

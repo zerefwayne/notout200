@@ -17,5 +17,8 @@ export class Inning {
   result_margin: string;
   batting_innings: number;
   toss: string;
+  countryName?: string;
+  countryCode?: string;
+  coordinates? : number[];
 
 }
