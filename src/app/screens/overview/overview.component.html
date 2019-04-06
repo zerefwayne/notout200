@@ -8,7 +8,7 @@
 
     <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35">
 
-      <app-stat-two title="Highest Run Scorer" value="18476"></app-stat-two>
+      <app-stat-two title="Highest Run Scorer" [value]="sachinData.runs"></app-stat-two>
 
       <div style="font-size: 1.7rem; color: #777777;">
 
@@ -31,12 +31,13 @@
 
     <div fxFlex="55" fxLayoutAlign="center">
 
+      <canvas #playersInningChart></canvas>
 
     </div>
 
     <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
 
-      <app-stat-two title="Most Innings Played" value="463" direction="right"></app-stat-two>
+      <app-stat-two title="Most Innings Played" [value]="sachinData.innings" direction="right"></app-stat-two>
 
       <div style="font-size: 1.7rem; color: #777777; text-align: right">
 
