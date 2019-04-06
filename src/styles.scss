@@ -12,9 +12,17 @@ body { margin: 0; font-family: 'Rubik', sans-serif;}
 
 .page-header{
 
-  padding: 3rem 5rem;
-  font-size: 6rem;
+  padding: 3rem 5rem 0 5rem;
 
+  header {
+    font-size: 6rem;
+  }
+
+  p{
+    font-size: 2rem;
+    font-style: italic;
+    color: gray;
+  }
 
 }
 

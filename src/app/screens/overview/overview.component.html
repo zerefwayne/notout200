@@ -1,12 +1,16 @@
-<header class="page-header">
+<div class="page-header">
+<header>
   Overview
 </header>
-
-<section class="section" fxLayout="column" fxLayoutGap="5rem">
+  <p>
+    Visualising data of Top 10 ODI Run Getters
+  </p>
+</div>
+<section class="section" fxLayout="column" fxLayoutGap="10rem">
 
   <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35">
+    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
 
       <app-stat-two title="Highest Run Scorer" [value]="sachinData.runs"></app-stat-two>
 
@@ -49,6 +53,30 @@
 
 
   </section>
+
+  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+
+    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
+
+      <app-stat-two title="Centuries Scored" [value]="sachinData.centuries"></app-stat-two>
+
+      <div style="font-size: 1.7rem; color: #777777;">
+
+        Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
+
+      </div>
+
+    </div>
+
+    <div fxFlex="55" fxLayoutAlign="center">
+
+      <canvas #playersCenturyChart></canvas>
+
+    </div>
+
+
+  </section>
+
 
 
 </section>

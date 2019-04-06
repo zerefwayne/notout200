@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterContentChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import Chart from 'chart.js';
 
 import {DataService} from '../../services/data.service';
@@ -17,6 +17,7 @@ export class OverviewComponent implements OnInit {
 
   @ViewChild('playersRunChart') playersRunChart: ElementRef;
   @ViewChild('playersInningChart') playersInningChart: ElementRef;
+  @ViewChild('playersCenturyChart') playersCenturyChart: ElementRef;
 
   constructor(private dataService: DataService) { }
 
@@ -27,7 +28,10 @@ export class OverviewComponent implements OnInit {
 
     this.generatePlayersRunChart();
     this.generatePlayersInningChart();
+    this.generatePlayersCenturyChart();
+
   }
+
 
   generatePlayersRunChart() {
 
@@ -47,7 +51,8 @@ export class OverviewComponent implements OnInit {
       options: {
         legend: {
           display: true
-        }
+        },
+
       }
 
     });
@@ -63,7 +68,7 @@ export class OverviewComponent implements OnInit {
         labels: this.playerData.map((player) => player.name),
         datasets: [
           {
-            label: 'Runs scored',
+            label: 'Innings played',
             data: this.playerData.map((player) => player.innings),
             backgroundColor: this.playerData.map((player) => player.name === 'Sachin Tendulkar' ? colors.colory : colors.colorb),
             fill: 'boundary'
@@ -78,10 +83,49 @@ export class OverviewComponent implements OnInit {
           line: {
             tension: 0
           }
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
         }
       }
 
     });
+
+  }
+
+    generatePlayersCenturyChart() {
+
+      this.playersCenturyChart = new Chart(this.playersCenturyChart.nativeElement, {
+
+        type: 'bar',
+        data: {
+          labels: this.playerData.map((player) => player.name),
+          datasets: [
+            {
+              label: 'Centuries scored',
+              data: this.playerData.map((player) => player.centuries),
+              backgroundColor: this.playerData.map((player) => player.name === 'Sachin Tendulkar' ? colors.colory : colors.colorb)
+            }
+          ]
+        },
+        options: {
+          legend: {
+            display: true
+          },
+          scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+          }
+        }
+
+      });
 
 
 
