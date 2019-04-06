@@ -4,9 +4,9 @@
 
 <section class="section">
 
-  <section class="section--overall" fxLayout="row">
+  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-around">
 
-  <div fxLayout="column" fxLayoutGap="2rem" fxFlex="35">
+  <div fxLayout="column" fxLayoutGap="2rem" fxFlex="35" fxLayoutAlign="center">
 
     <app-stat-two [title]="'Total Innings'" [value]="overall.innings"></app-stat-two>
     <app-stat-two [title]="'Total Runs'" [value]="overall.runs"></app-stat-two>
@@ -14,8 +14,9 @@
 
   </div>
 
-  <div fxFlex style="background-color: #AAAAAA;">
+  <div fxFlex="55">
 
+    <canvas #overallInningsChart></canvas>
 
   </div>
 

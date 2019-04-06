@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {DataService} from '../../services/data.service';
 import {Inning} from '../../services/inning.model';
 import * as _ from 'lodash';
+import Chart from 'chart.js';
+import colors from '../../shared/colors.model';
 
 @Component({
   selector: 'app-worldcup',
@@ -10,6 +12,8 @@ import * as _ from 'lodash';
   styleUrls: ['./worldcup.component.scss']
 })
 export class WorldcupComponent implements OnInit {
+
+  @ViewChild('overallInningsChart') overallChart: ElementRef;
 
   worldCupDates = {
     "1992": {
@@ -19,6 +23,10 @@ export class WorldcupComponent implements OnInit {
     "1996": {
       "start": moment('14 Feb 1996', 'DD MMM YYYY').startOf('day'),
       "end": moment('17 Mar 1996', 'DD MMM YYYY').endOf('day')
+    },
+    "1999": {
+      "start": moment('14 May 1999', 'DD MMM YYYY').startOf('day'),
+      "end": moment('20 Jun 1999', 'DD MMM YYYY').endOf('day')
     },
     "2003": {
       "start": moment('9 Feb 2003', 'DD MMM YYYY').startOf('day'),
@@ -35,11 +43,14 @@ export class WorldcupComponent implements OnInit {
   };
 
   overall =  {
+    inningsObjects: [],
     runs: 0,
     innings: 0,
     not_outs: 0,
-    average: 0
+    average: 0,
   };
+
+  statsByYear = {};
 
   constructor(private dataService: DataService) { }
 
@@ -47,20 +58,34 @@ export class WorldcupComponent implements OnInit {
 
     Object.keys(this.worldCupDates).forEach(date => {
 
+      this.statsByYear[date] = {
+        inningsObjects: [],
+        runs: 0,
+        innings: 0,
+        not_outs: 0,
+        average: 0,
+      };
+
       let start = this.worldCupDates[date].start;
       let end = this.worldCupDates[date].end;
 
       this.dataService.getInningsBetween(start, end).forEach((inning: Inning) => {
 
-        this.overall.runs += inning.batting_score;
-
         if(inning.did_not_bat === 0){
 
+          this.overall.inningsObjects.push(inning);
+          this.statsByYear[date].inningsObjects.push(inning);
+
+          this.overall.runs += inning.batting_score;
+          this.statsByYear[date].runs += inning.batting_score;
+
           this.overall.innings += 1;
+          this.statsByYear[date].innings += 1;
 
           if(inning.notout === 1){
 
             this.overall.not_outs += 1;
+            this.statsByYear[date].not_outs += 1;
 
           }
 
@@ -68,9 +93,51 @@ export class WorldcupComponent implements OnInit {
 
       });
 
+      this.statsByYear[date].average = _.round( this.statsByYear[date].runs / (this.statsByYear[date].innings - this.statsByYear[date].not_outs), 2);
+
     });
 
     this.overall.average = _.round(this.overall.runs / (this.overall.innings - this.overall.not_outs), 2);
+
+    this.generateOverallInningsChart();
+
+  }
+
+  generateOverallInningsChart() {
+
+      const runsPerWC: number[] = [];
+
+      Object.keys(this.statsByYear).forEach(year => {
+
+        runsPerWC.push(this.statsByYear[year]['runs']);
+
+      });
+
+
+      this.overallChart = new Chart(this.overallChart.nativeElement, {
+
+        type: 'bar',
+        data: {
+          labels: Object.keys(this.statsByYear),
+          datasets: [
+            {
+              label: 'Runs scored',
+              data: runsPerWC,
+              backgroundColor: [
+                colors.colorb,
+                colors.colorb,
+                colors.colorb,
+                colors.colorb,
+                colors.colorb,
+                colors.colory,
+              ]
+            }
+          ]
+        }
+
+      });
+
+
 
   }
 
