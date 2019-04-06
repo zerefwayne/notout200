@@ -1,7 +1,16 @@
 @import "../../../styles";
 
-.first{
+.section{
 
+  &--overall{
+    padding: 0 5rem;
+  }
+
+  &--impact{
+
+    padding: 2rem 5rem;
+
+  }
 
 
 }
