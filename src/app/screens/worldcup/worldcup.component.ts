@@ -143,14 +143,6 @@ export class WorldcupComponent implements OnInit {
         options: {
           legend: {
             display: true
-          },
-          scales: {
-            xAxes: [{
-              barThickness: 50,
-              gridLines: {
-                offsetGridLines: true
-              }
-            }]
           }
         }
 
