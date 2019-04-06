@@ -34,9 +34,15 @@
 
   <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
 
+    <div fxFlex="55" fxLayoutAlign="center">
+
+      <canvas #ninetiesChart></canvas>
+
+    </div>
+
     <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
 
-      <app-stat-two title="Nervous 90s" [value]="18"></app-stat-two>
+      <app-stat-two title="Nervous 90s" [value]="18" direction="right"></app-stat-two>
 
       <div style="font-size: 1.7rem; color: #777777;">
 
@@ -46,11 +52,7 @@
 
     </div>
 
-    <div fxFlex="55" fxLayoutAlign="center">
 
-      <canvas #ninetiesChart></canvas>
-
-    </div>
 
 
   </section>
