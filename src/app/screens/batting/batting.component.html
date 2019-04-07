@@ -7,20 +7,19 @@
   </p>
 </div>
 
-<section class="section" fxLayout="column" fxLayoutGap="10rem">
+<section class="section" fxLayout="column" fxLayoutGap.xs="5rem" fxLayoutGap="10rem">
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
+    <div fxLayout="column" fxFlexOrder.xs="2" fxFlex.gt-xs="55" fxLayoutAlign="center">
 
-    <div fxFlex="55" fxLayoutAlign="center">
-
-      <canvas #runsByYearChart></canvas>
+    <canvas #runsByYearChart></canvas>
 
     </div>
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
+    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxFlexOrder.xs="1" fxLayoutAlign="center">
 
-      <app-stat-two title="Most Runs in a Calendar Year" [value]="1894" direction="right"></app-stat-two>
+    <app-stat-two title="Most Runs in a Calendar Year" [value]="1894" direction="right"></app-stat-two>
       <div style="font-size: 1.7rem; color: #777777; text-align: right;">
 
         Sachin also holds the record of most number of runs ever scored in a calendar year. He achieved the feat in 1998 where he scored a total of 1894 runs.
@@ -34,11 +33,11 @@
   </section>
 
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
+    <div fxLayout="column" fxFlex.gt-xs="35" fxLayoutGap="3rem" fxLayoutAlign="center">
 
-      <app-stat-two title="Career Average" [value]="44.83"></app-stat-two>
+    <app-stat-two title="Career Average" [value]="44.83"></app-stat-two>
       <div style="font-size: 1.7rem; color: #777777;">
 
         Managing a career average of 44.83 over a span of more than 20 years is a monumental achievement in itself. His average peaked in 2001 when he scored at 69.54 per innings.
@@ -56,17 +55,17 @@
 
   </section>
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
-    <div fxFlex="55" fxLayoutAlign="center">
+    <div fxLayout="column" fxFlexOrder.xs="2" fxFlex.gt-xs="55" fxLayoutAlign="center">
 
-      <canvas #ninetiesChart></canvas>
+    <canvas #ninetiesChart></canvas>
 
     </div>
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
+    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxFlexOrder.xs="1" fxLayoutAlign="center">
 
-      <app-stat-two title="Nervous 90s" [value]="18" direction="right"></app-stat-two>
+    <app-stat-two title="Nervous 90s" [value]="18" direction="right"></app-stat-two>
 
       <div style="font-size: 1.7rem; text-align: right; color: #777777;">
 
