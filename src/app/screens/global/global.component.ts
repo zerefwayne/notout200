@@ -40,9 +40,9 @@ export class GlobalComponent implements OnInit {
 
       if(this.countryData[code].runs > 1500){
         return 'g1500';
-      } else if (this.countryData[code].runs < 1500){
+      } else if (this.countryData[code].runs > 1000){
         return 'l1500';
-      } else if (this.countryData[code].runs < 1000){
+      } else if (this.countryData[code].runs > 500){
         return 'l1000';
       }
 
@@ -235,7 +235,7 @@ export class GlobalComponent implements OnInit {
         g1500: '#BE943A',
         l1500: '#E7B446',
         l1000: '#EDC878',
-        l500: 'F4DCAA',
+        l500: '#F4DCAA',
 
       },data: this.countryMapFill
     });
