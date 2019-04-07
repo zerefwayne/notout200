@@ -19,11 +19,13 @@ export class GlobalComponent implements OnInit {
   @ViewChild('worldmap') worldMap: ElementRef;
   @ViewChild('countryWiseChart') countryWiseChart: ElementRef;
   @ViewChild('countryAverageChart') countryAverageChart: ElementRef;
+  @ViewChild('runsWinContribution') rwChart: ElementRef;
+  @ViewChild('centuriesWinContribution') cwChart: ElementRef;
 
   private innings: Inning[] = [];
   private countryMapFill: {} = {};
   private countryData: {} = {};
-  private awayRecord: {runs: number, innings: number, notouts: number, average: number};
+  private awayRecord: {runs: number, innings: number, notouts: number, average: number, centuries: number};
 
 
   constructor(private dataService: DataService) { }
@@ -34,7 +36,8 @@ export class GlobalComponent implements OnInit {
       runs: 0,
       innings: 0,
       notouts: 0,
-      average: 0
+      average: 0,
+      centuries: 0
     };
 
     this.innings = this.dataService.getAllInnings();
@@ -56,6 +59,10 @@ export class GlobalComponent implements OnInit {
         if (this.countryData[inning.countryCode]) {
 
           this.countryData[inning.countryCode].runs += inning.batting_score;
+
+          if(inning.batting_score >= 100){
+            this.awayRecord.centuries += 1;
+          }
 
           this.countryData[inning.countryCode].innings += 1;
 
@@ -83,6 +90,10 @@ export class GlobalComponent implements OnInit {
           };
 
           if (inning.did_not_bat === 0) {
+
+            if(inning.batting_score >= 100){
+              this.awayRecord.centuries += 1;
+            }
 
             this.countryData[inning.countryCode].runs += inning.batting_score;
 
@@ -140,6 +151,8 @@ export class GlobalComponent implements OnInit {
 
     this.generateCountryChart();
     this.generateAverageChart();
+    this.generateRunWinAwayChart();
+    this.generateCenturiesWinAwayChart();
 
   }
 
@@ -253,6 +266,117 @@ export class GlobalComponent implements OnInit {
 
   }
 
+  generateCenturiesWinAwayChart(){
+
+    const runsWinData = [0, 0, 0]; //0 = win //1 = loss //2= n/r
+
+    this.innings.forEach((inning: Inning) => {
+
+      if(inning.batting_score >= 100 && inning.countryCode !== 'IND') {
+
+        if (inning.match_result == 'won') {
+
+          runsWinData[0] += 1;
+
+        } else if (inning.match_result == 'lost') {
+
+          runsWinData[1] += 1;
+
+        } else {
+          runsWinData[2] += 1;
+        }
+
+      }
+
+    });
+
+    this.cwChart = new Chart(this.cwChart.nativeElement, {
+
+      type: 'pie',
+      data: {
+        labels: ['Win', 'Loss', 'Tied/NR'],
+        datasets: [
+          {
+            label: 'Runs scored',
+            data: runsWinData,
+            backgroundColor: [
+              colors.colory,
+              colors.colorb,
+              '#666666'
+            ]
+          }
+        ]
+      },
+      options: {
+        legend: {
+          display: true
+        }
+      }
+
+    });
+
+
+
+
+
+
+  }
+
+  generateRunWinAwayChart(){
+
+
+    const runsWinData = [0, 0, 0]; //0 = win //1 = loss //2= n/r
+
+    this.innings.forEach((inning: Inning) => {
+
+      if(inning.countryCode !== 'IND') {
+
+        if (inning.match_result == 'won') {
+
+          runsWinData[0] += inning.batting_score;
+
+        } else if (inning.match_result == 'lost') {
+
+          runsWinData[1] += inning.batting_score;
+
+        } else {
+          runsWinData[2] += inning.batting_score;
+        }
+
+      }
+
+    });
+
+    this.rwChart = new Chart(this.rwChart.nativeElement, {
+
+      type: 'pie',
+      data: {
+        labels: ['Win', 'Loss', 'Tied/NR'],
+        datasets: [
+          {
+            label: 'Runs scored',
+            data: runsWinData,
+            backgroundColor: [
+              colors.colory,
+              colors.colorb,
+              '#666666'
+            ]
+          }
+        ]
+      },
+      options: {
+        legend: {
+          display: true
+        }
+      }
+
+    });
+
+
+
+
+
+  }
 
 
 

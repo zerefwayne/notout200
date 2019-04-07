@@ -183,8 +183,8 @@ export class WorldcupComponent implements OnInit {
             data: runs_vs_result,
             backgroundColor: [
               colors.colory,
-              colors.colorr,
-              colors.colorb
+              colors.colorb,
+              '#666666'
             ]
           }
         ]
@@ -234,8 +234,8 @@ export class WorldcupComponent implements OnInit {
             data: centuries_vs_result,
             backgroundColor: [
               colors.colory,
-              colors.colorr,
-              colors.colorb
+              colors.colorb,
+              '#666666'
             ]
           }
         ]

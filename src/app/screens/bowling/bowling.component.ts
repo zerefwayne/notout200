@@ -4,6 +4,7 @@ import {Inning} from '../../services/inning.model';
 import * as _ from 'lodash';
 import colors from '../../shared/colors.model';
 import Chart from 'chart.js';
+import {del} from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-bowling',
@@ -40,6 +41,16 @@ export class BowlingComponent implements OnInit {
           wicketsByOpposition[inning.opposition.toUpperCase()] = inning.wickets
         }
       }
+    });
+
+    const filterArray = Object.keys(wicketsByOpposition);
+
+    filterArray.forEach((country) => {
+
+      if(wicketsByOpposition[country] < 3){
+        delete wicketsByOpposition[country];
+      }
+
     });
 
     this.wicketsChart = new Chart(this.wicketsChart.nativeElement, {

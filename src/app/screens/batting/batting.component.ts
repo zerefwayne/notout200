@@ -121,23 +121,43 @@ export class BattingComponent implements OnInit {
 
     });
 
+    const array = Object.keys(averageByYear);
+    const tempObject = {...averageByYear};
+
+    array.forEach(country => {
+
+      if(tempObject[country]['innings'] < 5){
+        delete tempObject[country];
+      }
+
+    });
+
     this.averageChart = new Chart(this.averageChart.nativeElement, {
 
       type: 'bar',
       data: {
-        labels: Object.keys(averageByYear),
+        labels: Object.keys(tempObject),
         datasets: [
           {
             label: 'Averages By Year',
-            data: Object.keys(averageByYear).map((year) => {
-                return averageByYear[year]['average'];
+            data: Object.keys(tempObject).map((year) => {
+                return tempObject[year]['average'];
             }),
-            backgroundColor: Object.keys(averageByYear).map((year) => {
+            backgroundColor: Object.keys(tempObject).map((year) => {
               return year === '2001' ? colors.colory : colors.colorb
             })
 
           }
         ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
       }
 
 
