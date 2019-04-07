@@ -10,11 +10,11 @@
 
 <section class="section" fxLayout="column" fxLayoutGap="7rem">
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
+    <div fxLayout="column" fxFlex.gt-xs="35" fxLayoutGap="3rem" fxLayoutAlign="center">
 
-      <app-stat-two title="Total Wickets Taken" [value]="totalWickets"></app-stat-two>
+    <app-stat-two title="Total Wickets Taken" [value]="totalWickets"></app-stat-two>
       <div style="font-size: 1.7rem; color: #777777;">
 
         Sachin was a spinner who could bowl off-spinners and leg-spinners as per his will. He was a handy bowler who didn't give away a lot of runs and held one end during middle overs. Sachin has taken the highest number of wickets against Pakistan.
@@ -23,27 +23,26 @@
 
     </div>
 
-    <div fxFlex="55" fxLayoutAlign="center">
+    <div fxFlex.gt-xs="55" fxLayoutAlign="center">
 
-      <canvas #wicketsByOpposition></canvas>
+        <canvas #wicketsByOpposition></canvas>
 
     </div>
 
 
   </section>
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
+    <div fxLayout="column" fxFlexOrder.xs="2" fxFlex.gt-xs="35" fxLayoutAlign="center">
 
-    <div fxFlex="55" fxLayoutAlign="center">
-
-      <canvas #catchesChart></canvas>
+    <canvas #catchesChart></canvas>
 
     </div>
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
+    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxFlexOrder.xs="1" fxLayoutAlign="center">
 
-      <app-stat-two title="Total Catches Taken" [value]="totalCatches" direction="right"></app-stat-two>
+    <app-stat-two title="Total Catches Taken" [value]="totalCatches" direction="right"></app-stat-two>
       <div style="font-size: 1.7rem; color: #777777; text-align: right;">
 
         Sachin was also a good fielder as the stats show. He has taken a total of {{ totalCatches }} in his ODI career.
