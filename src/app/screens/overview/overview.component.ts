@@ -71,7 +71,9 @@ export class OverviewComponent implements OnInit {
             label: 'Innings played',
             data: this.playerData.map((player) => player.innings),
             backgroundColor: this.playerData.map((player) => player.name === 'Sachin Tendulkar' ? colors.colory : colors.colorb),
-            fill: 'boundary'
+            fill: 'boundary',
+            borderColor: colors.colorb,
+            pointRadius: 4
           }
         ]
       },

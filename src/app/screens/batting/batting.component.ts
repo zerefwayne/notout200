@@ -134,7 +134,7 @@ export class BattingComponent implements OnInit {
 
     this.averageChart = new Chart(this.averageChart.nativeElement, {
 
-      type: 'bar',
+      type: 'line',
       data: {
         labels: Object.keys(tempObject),
         datasets: [
@@ -145,12 +145,19 @@ export class BattingComponent implements OnInit {
             }),
             backgroundColor: Object.keys(tempObject).map((year) => {
               return year === '2001' ? colors.colory : colors.colorb
-            })
+            }),
+            fill: false,
+            borderColor: colors.colorb
 
           }
         ]
       },
       options: {
+        elements: {
+          line: {
+            tension: 0
+          }
+        },
         scales: {
           yAxes: [{
             ticks: {
