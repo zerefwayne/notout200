@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 
-export class Inning {
+export interface Inning {
 
   batting_score: number;
   did_not_bat: number;
@@ -17,8 +17,8 @@ export class Inning {
   result_margin: string;
   batting_innings: number;
   toss: string;
-  countryName?: string;
   countryCode?: string;
+  countryName?: string;
   coordinates? : number[];
 
 }

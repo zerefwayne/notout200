@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import {PlayerData} from './player.model';
 import { HttpClient } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -45,71 +46,32 @@ export class DataService {
 
   }
 
-  generateRandomColor(): string {
+  /*getCountryCodes(location: string) {
 
-      let letters = '123456789ABCDE';
-
-      let a =  letters[Math.floor(Math.random() * 14)];
-      let b = letters[Math.floor(Math.random() * 14)];
-
-      return '#'+a+b+a+b+a+b;
+    return this.http.get(encodeURI('https://api.opencagedata.com/geocode/v1/json?q=' + location + '&key=64edaa2d59224ae497193c859842e382&pretty=1'));
 
   }
 
-  getCountryCodes(location: string) {
+  /!*setCountryCodes() {
 
-    return this.http.get(encodeURI('https://api.opencagedata.com/geocode/v1/json?q=' + location + '&key=7d78dd8a496a47628854cce774400e74&pretty=1'));
+    this.inningsData.forEach((inning: Inning, index: number) => {
 
-    //return this.http.get( encodeURI('https://api.opencagedata.com/geocode/v1/json?q='+location+'&key=7d78dd8a496a47628854cce774400e74&pretty=1'));
-  }
 
-  async setCountryCodes() {
+      this.getCountryCodes(inning.ground).subscribe(response => {
 
-    let groundsData = [];
-    let uniqueGroundNames = [];
+        // @ts-ignore
+        const code = response.results[0].components['ISO_3166-1_alpha-3'];
+        // @ts-ignore
+        const name = response.results[0].components.country;
 
-    this.inningsData.forEach((inning: Inning) => {
-
-      if (uniqueGroundNames.indexOf(inning.ground) === -1) {
-        groundsData.push({
-          groundName: inning.ground,
-          countryCode: '',
-          countryName: '',
-          coordinates: [0, 0]
-        });
-
-        uniqueGroundNames.push(inning.ground);
-      }
-
-    });
-
-    await groundsData.slice(0, 20).forEach(ground => {
-
-      this.getCountryCodes(ground.groundName).subscribe(response => {
-
-        ground.countryCode = response['results'][0]['components']['ISO_3166-1_alpha-3'];
-        ground.countryName = response['results'][0]['components']['country'];
-        ground.coordinates[0] = response['results'][0]['geometry']['lat'];
-        ground.coordinates[1] = response['results'][0]['geometry']['lng'];
+        inning.countryCode = code;
+        inning.countryName = name;
 
       });
 
     });
 
-    await this.inningsData.forEach((inning: Inning) => {
-
-      const ground = groundsData.find((ground) => {
-        return ground.groundName === inning.ground;
-      });
-
-      inning.countryName = ground.countryName;
-      inning.countryCode = ground.countryCode;
-      inning.coordinates = ground.coordinates;
-
-    });
-
-    console.log(this.inningsData);
-
   }
+*!/*/
 
 }

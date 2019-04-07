@@ -1,6 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import colors from '../../shared/colors.model';
 import * as Datamap from "node_modules/datamaps/dist/datamaps.world.min.js";
+import {DataService} from '../../services/data.service';
+import {Inning} from '../../services/inning.model';
+import * as _ from 'lodash';
 
 let map;
 
@@ -14,9 +17,26 @@ export class GlobalComponent implements OnInit {
 
   @ViewChild('worldmap') worldMap: ElementRef;
 
-  constructor() { }
+  private innings: Inning[] = [];
+  private countryMapFill: {} = {};
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+
+    this.innings = this.dataService.getAllInnings();
+
+    this.innings.forEach((inning: Inning) => {
+
+      if(this.countryMapFill[inning.countryCode] === undefined){
+
+        this.countryMapFill[inning.countryCode] = { fillKey: inning.countryCode === 'IND' ? 'home' : 'away' };
+
+      }
+
+    });
+
+    console.log(this.countryMapFill);
 
     const data = [{
       name: 'Joe 4',
@@ -38,24 +58,10 @@ export class GlobalComponent implements OnInit {
         authorHasTraveledTo: colors.colory,
         home: colors.colory,
         away: colors.colorb
-      },data: {
-        IND: { fillKey: "home" },
-        AUS: { fillKey: "away"},
-        NZL: { fillKey: "away"},
-        KEN: { fillKey: "away"},
-        GBR: { fillKey: "away"},
-        ZAF: { fillKey: "away"},
-        PAK: { fillKey: "away"},
-        AFG: { fillKey: "away"},
-        BGD: { fillKey: "away"},
-        LKA: { fillKey: "away"},
-        ZWE: { fillKey: "away"},
-      }
+      },data: this.countryMapFill
     });
 
     map.bubbles(data);
-
-
 
   }
 
