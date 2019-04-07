@@ -1,0 +1,29 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer fxFlex="0 0 20" fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)">
+
+    <app-sidenav></app-sidenav>
+
+  </mat-sidenav>
+  <mat-sidenav-content fxFlex.gt-md="0 0 80" fxFlex.lt-md="0 0 100">
+
+    <mat-toolbar class="app-toolbar">
+
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span style="font-weight: 400;"><span style="color: rgba(231, 180, 70, 1);">200*</span> | Visualising Sachin Tendulkar's Career</span>
+
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

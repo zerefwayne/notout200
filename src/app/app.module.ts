@@ -15,6 +15,9 @@ import { GlobalComponent } from './screens/global/global.component';
 import { StatTwoComponent } from './components/stat-two/stat-two.component';
 import { StatOneComponent } from './components/stat-one/stat-one.component';
 import {HttpClientModule} from '@angular/common/http';
+import { MainComponent } from './main/main.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import {HttpClientModule} from '@angular/common/http';
     GlobalComponent,
     StatTwoComponent,
     StatOneComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,13 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

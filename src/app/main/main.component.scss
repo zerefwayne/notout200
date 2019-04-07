@@ -1,0 +1,31 @@
+@import "../../styles";
+
+.sidenav-container {
+  min-height: 100vh;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.app-toolbar{
+
+  display: none;
+
+  @media (max-width: 75em) {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: $colorb;
+    color: $colorw;
+
+  }
+
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}

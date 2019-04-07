@@ -207,9 +207,6 @@ export class BattingComponent implements OnInit {
             data: Object.keys(runsByYear).map((year) => {
               return runsByYear[year];
             }),
-            backgroundColor: Object.keys(runsByYear).map((year) => {
-              return year === '1998' ? colors.colory : colors.colorb
-            }),
             fill: true,
             backgroundColor: 'rgba(12, 9, 13, .7)',
             borderColor: colors.colorb

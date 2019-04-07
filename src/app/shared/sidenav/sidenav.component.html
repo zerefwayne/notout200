@@ -1,8 +1,12 @@
-<section class="sidenav-container" fxLayout="column">
+<section class="sidenav-container" fxLayout="column" fxLayoutGap="3rem">
+
+  <div fxFlex="25">
 
   <img src="../../../assets/sachin-header.png" class="header-image">
 
-  <div fxLayout="column" fxLayoutGap="1rem" style="margin: 2rem 0;">
+  </div>
+
+  <div fxFlex fxLayout="column" fxLayoutGap="1rem" style="margin: 2rem 0;">
 
     <button mat-raised-button class="nav-button" routerLink="/overview" routerLinkActive="active">Overview</button>
     <button mat-raised-button class="nav-button" routerLink="/batting-wizard" routerLinkActive="active">Batting Wizard</button>
@@ -12,7 +16,7 @@
 
   </div>
 
-  <div style="color: white; margin-top: 25rem;" fxLayout="column" fxFlex fxLayoutAlign="center center">
+  <div style="color: white;" fxFlex="20" fxLayout="column" fxLayoutAlign="center center">
 
     <img src="../../../assets/credits.svg">
 
