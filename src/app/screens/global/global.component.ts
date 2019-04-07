@@ -4,6 +4,7 @@ import * as Datamap from "node_modules/datamaps/dist/datamaps.world.min.js";
 import {DataService} from '../../services/data.service';
 import {Inning} from '../../services/inning.model';
 import * as _ from 'lodash';
+import Chart from 'chart.js';
 
 let map;
 
@@ -16,36 +17,112 @@ let map;
 export class GlobalComponent implements OnInit {
 
   @ViewChild('worldmap') worldMap: ElementRef;
+  @ViewChild('countryWiseChart') countryWiseChart: ElementRef;
+  @ViewChild('countryAverageChart') countryAverageChart: ElementRef;
 
   private innings: Inning[] = [];
   private countryMapFill: {} = {};
+  private countryData: {} = {};
+  private awayRecord: {runs: number, innings: number, notouts: number, average: number};
+
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+
+    this.awayRecord = {
+      runs: 0,
+      innings: 0,
+      notouts: 0,
+      average: 0
+    };
 
     this.innings = this.dataService.getAllInnings();
 
     this.innings.forEach((inning: Inning) => {
 
       if(this.countryMapFill[inning.countryCode] === undefined){
-
-        this.countryMapFill[inning.countryCode] = { fillKey: inning.countryCode === 'IND' ? 'home' : 'away' };
-
+        this.countryMapFill[inning.countryCode] = { fillKey: inning.countryCode === 'IND' ? 'home' : 'away', name: inning.countryName };
       }
 
     });
 
     console.log(this.countryMapFill);
 
-    const data = [{
-      name: 'Joe 4',
-      yield: 400,
-      country: 'IND',
-      fillKey: 'away',
-      latitude: 50.07,
-      longitude: 78.43
-    }];
+    this.innings.forEach((inning: Inning) => {
+
+      if(inning.countryCode !== 'IND') {
+
+        if (this.countryData[inning.countryCode]) {
+
+          this.countryData[inning.countryCode].runs += inning.batting_score;
+
+          this.countryData[inning.countryCode].innings += 1;
+
+          if (inning.notout === 1) {
+
+            this.countryData[inning.countryCode].notouts += 1;
+
+          }
+
+          if (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts !== 0) {
+
+            this.countryData[inning.countryCode].average = _.round(this.countryData[inning.countryCode].runs / (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts), 2);
+
+          }
+
+
+        } else {
+
+          this.countryData[inning.countryCode] = {
+            countryName: inning.countryName,
+            runs: 0,
+            innings: 0,
+            notouts: 0,
+            average: 0
+          };
+
+          if (inning.did_not_bat === 0) {
+
+            this.countryData[inning.countryCode].runs += inning.batting_score;
+
+            this.countryData[inning.countryCode].innings += 1;
+
+            if (inning.notout === 1) {
+
+              this.countryData[inning.countryCode].notouts += 1;
+
+            }
+
+            if (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts !== 0) {
+
+              this.countryData[inning.countryCode].average = _.round(this.countryData[inning.countryCode].runs / (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts), 2);
+
+            }
+
+          }
+
+        }
+
+      }
+
+    });
+
+
+
+    Object.keys(this.countryData).forEach((country) => {
+
+      let data = this.countryData[country];
+
+      this.awayRecord.runs += this.countryData[country].runs;
+      this.awayRecord.innings += this.countryData[country].innings;
+      this.awayRecord.notouts += this.countryData[country].notouts;
+
+      this.awayRecord.average = _.round( this.awayRecord.runs / (this.awayRecord.innings - this.awayRecord.notouts), 2);
+
+    });
+
+
 
     map = new Datamap({
       element: this.worldMap.nativeElement,
@@ -56,13 +133,118 @@ export class GlobalComponent implements OnInit {
       fills: {
         defaultFill: '#CCCCCC',
         authorHasTraveledTo: colors.colory,
-        home: colors.colory,
+        home: colors.colorp,
         away: colors.colorb
       },data: this.countryMapFill
     });
 
-    map.bubbles(data);
+    this.generateCountryChart();
+    this.generateAverageChart();
 
   }
+
+  generateCountryChart(){
+
+    // FILTER FUNCTION - To remove countries where runs less than 100
+
+    const array = Object.keys(this.countryData);
+
+    const tempCountryData = {...this.countryData};
+
+    array.forEach(country => {
+
+      if(tempCountryData[country].runs < 100){
+        delete tempCountryData[country];
+      }
+
+    });
+
+
+    this.countryWiseChart = new Chart(this.countryWiseChart.nativeElement, {
+
+      type: 'bar',
+      data: {
+
+        labels: Object.keys(tempCountryData).map((country) => tempCountryData[country].countryName),
+        datasets: [
+          {
+            label: 'Runs',
+            data: Object.keys(tempCountryData).map((country) => tempCountryData[country].runs),
+            backgroundColor: Object.keys(tempCountryData).map((country) => country === 'ARE' ? colors.colory : colors.colorb)
+          }
+
+        ]
+
+
+      }
+
+
+
+    });
+
+
+
+
+
+
+  }
+  generateAverageChart(){
+
+    // FILTER FUNCTION - To remove countries where runs less than 100
+
+    const array = Object.keys(this.countryData);
+
+    const tempCountryData = {...this.countryData};
+
+    array.forEach(country => {
+
+      if(tempCountryData[country].innings < 5){
+        delete tempCountryData[country];
+      }
+
+    });
+
+
+    this.countryAverageChart = new Chart(this.countryAverageChart.nativeElement, {
+
+      type: 'bar',
+      data: {
+
+        labels: Object.keys(tempCountryData).map((country) => tempCountryData[country].countryName),
+        datasets: [
+          {
+            label: 'Average',
+            data: Object.keys(tempCountryData).map((country) => tempCountryData[country].average),
+            backgroundColor: Object.keys(tempCountryData).map((country) => country === 'ZWE' ? colors.colory : colors.colorb)
+          }
+
+        ]
+
+
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+
+      }
+
+
+
+    });
+
+
+
+
+
+
+  }
+
+
+
 
 }
