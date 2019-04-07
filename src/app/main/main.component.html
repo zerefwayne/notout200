@@ -16,10 +16,10 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="isHandset$ | async" style="display: flex; justify-content: center; align-items: center;">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span style="font-weight: 400;"><span style="color: rgba(231, 180, 70, 1);">200*</span> | Visualising Sachin Tendulkar's Career</span>
+      <span style="font-weight: 500; font-size: 2.3rem; color: rgba(231, 180, 70, 1);">200*</span>
 
     </mat-toolbar>
 
