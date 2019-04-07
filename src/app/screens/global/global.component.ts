@@ -25,7 +25,7 @@ export class GlobalComponent implements OnInit {
   private innings: Inning[] = [];
   private countryMapFill: {} = {};
   private countryData: {} = {};
-  private awayRecord: {runs: number, innings: number, notouts: number, average: number, centuries: number};
+  awayRecord: {runs: number, innings: number, notouts: number, average: number, centuries: number};
 
 
   constructor(private dataService: DataService) { }
