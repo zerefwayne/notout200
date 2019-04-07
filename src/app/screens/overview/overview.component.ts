@@ -63,7 +63,7 @@ export class OverviewComponent implements OnInit {
 
     this.playersInningChart = new Chart(this.playersInningChart.nativeElement, {
 
-      type: 'line',
+      type: 'bar',
       data: {
         labels: this.playerData.map((player) => player.name),
         datasets: [
@@ -71,9 +71,6 @@ export class OverviewComponent implements OnInit {
             label: 'Innings played',
             data: this.playerData.map((player) => player.innings),
             backgroundColor: this.playerData.map((player) => player.name === 'Sachin Tendulkar' ? colors.colory : colors.colorb),
-            fill: 'boundary',
-            borderColor: colors.colorb,
-            pointRadius: 4
           }
         ]
       },

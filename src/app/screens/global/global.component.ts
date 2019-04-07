@@ -66,30 +66,7 @@ export class GlobalComponent implements OnInit {
 
       if(inning.countryCode !== 'IND') {
 
-        if (this.countryData[inning.countryCode]) {
-
-          this.countryData[inning.countryCode].runs += inning.batting_score;
-
-          if(inning.batting_score >= 100){
-            this.awayRecord.centuries += 1;
-          }
-
-          this.countryData[inning.countryCode].innings += 1;
-
-          if (inning.notout === 1) {
-
-            this.countryData[inning.countryCode].notouts += 1;
-
-          }
-
-          if (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts !== 0) {
-
-            this.countryData[inning.countryCode].average = _.round(this.countryData[inning.countryCode].runs / (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts), 2);
-
-          }
-
-
-        } else {
+        if (this.countryData[inning.countryCode] === undefined) {
 
           this.countryData[inning.countryCode] = {
             countryName: inning.countryName,
@@ -98,6 +75,8 @@ export class GlobalComponent implements OnInit {
             notouts: 0,
             average: 0
           };
+
+        }
 
           if (inning.did_not_bat === 0) {
 
@@ -123,7 +102,6 @@ export class GlobalComponent implements OnInit {
 
           }
 
-        }
 
       }
 
@@ -137,78 +115,7 @@ export class GlobalComponent implements OnInit {
 
     });
 
-    console.log(this.countryMapFill);
-
-    this.innings.forEach((inning: Inning) => {
-
-      if(inning.countryCode !== 'IND') {
-
-        if (this.countryData[inning.countryCode]) {
-
-          this.countryData[inning.countryCode].runs += inning.batting_score;
-
-          if(inning.batting_score >= 100){
-            this.awayRecord.centuries += 1;
-          }
-
-          this.countryData[inning.countryCode].innings += 1;
-
-          if (inning.notout === 1) {
-
-            this.countryData[inning.countryCode].notouts += 1;
-
-          }
-
-          if (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts !== 0) {
-
-            this.countryData[inning.countryCode].average = _.round(this.countryData[inning.countryCode].runs / (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts), 2);
-
-          }
-
-
-        } else {
-
-          this.countryData[inning.countryCode] = {
-            countryName: inning.countryName,
-            runs: 0,
-            innings: 0,
-            notouts: 0,
-            average: 0
-          };
-
-          if (inning.did_not_bat === 0) {
-
-            if(inning.batting_score >= 100){
-              this.awayRecord.centuries += 1;
-            }
-
-            this.countryData[inning.countryCode].runs += inning.batting_score;
-
-            this.countryData[inning.countryCode].innings += 1;
-
-            if (inning.notout === 1) {
-
-              this.countryData[inning.countryCode].notouts += 1;
-
-            }
-
-            if (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts !== 0) {
-
-              this.countryData[inning.countryCode].average = _.round(this.countryData[inning.countryCode].runs / (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts), 2);
-
-            }
-
-          }
-
-        }
-
-      }
-
-    });
-
-
-
-    Object.keys(this.countryData).forEach((country) => {
+     Object.keys(this.countryData).forEach((country) => {
 
       let data = this.countryData[country];
 
