@@ -207,7 +207,7 @@ export class GlobalComponent implements OnInit {
 
     this.countryAverageChart = new Chart(this.countryAverageChart.nativeElement, {
 
-      type: 'bar',
+      type: 'line',
       data: {
 
         labels: Object.keys(tempCountryData).map((country) => tempCountryData[country].countryName),
@@ -215,6 +215,10 @@ export class GlobalComponent implements OnInit {
           {
             label: 'Average',
             data: Object.keys(tempCountryData).map((country) => tempCountryData[country].average),
+            fill: false,
+            borderColor: colors.colorb,
+            pointBorderColor: colors.colorw,
+            pointRadius: 5,
             backgroundColor: Object.keys(tempCountryData).map((country) => country === 'ZWE' ? colors.colory : colors.colorb)
           }
 
@@ -223,6 +227,11 @@ export class GlobalComponent implements OnInit {
 
       },
       options: {
+        elements: {
+          line:{
+            tension: 0
+          }
+        },
         scales: {
           yAxes: [{
             ticks: {

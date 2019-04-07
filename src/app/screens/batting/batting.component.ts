@@ -47,8 +47,15 @@ export class BattingComponent implements OnInit {
             if(inning.batting_score >= 90 && inning.batting_score < 100){
               return colors.colory;
             }
-
             return '#EEEEEE'
+          }),
+          pointRadius: this.innings.map((inning: Inning) => {
+
+            if(inning.batting_score >= 90 && inning.batting_score < 100){
+              return 4;
+            }
+            return 2;
+
           })
 
 
