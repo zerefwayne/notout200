@@ -15,6 +15,7 @@ export class BattingComponent implements OnInit {
 
   @ViewChild('ninetiesChart') ninetiesChart: ElementRef;
   @ViewChild('averageByYearChart') averageChart: ElementRef;
+  @ViewChild('runsByYearChart') runsChart: ElementRef;
 
   constructor(private dataService: DataService) { }
 
@@ -24,6 +25,7 @@ export class BattingComponent implements OnInit {
     this.innings = this.dataService.getAllInnings();
     this.generateNinetiesChart();
     this.generateAverageChart();
+    this.generateRunsChart();
   }
 
   generateNinetiesChart() {
@@ -170,6 +172,80 @@ export class BattingComponent implements OnInit {
 
 
     });
+
+
+  }
+
+  generateRunsChart(){
+
+
+    let runsByYear = {};
+
+    this.innings.forEach((inning: Inning) => {
+
+      let year: number = inning.moment.get('year');
+
+      if(runsByYear[year] === undefined) {
+
+        runsByYear[year] = 0;
+
+      }
+
+      runsByYear[year] += inning.batting_score;
+
+
+    });
+
+    this.runsChart = new Chart(this.runsChart.nativeElement, {
+
+      type: 'line',
+      data: {
+        labels: Object.keys(runsByYear),
+        datasets: [
+          {
+            label: 'Runs By Year',
+            data: Object.keys(runsByYear).map((year) => {
+              return runsByYear[year];
+            }),
+            backgroundColor: Object.keys(runsByYear).map((year) => {
+              return year === '1998' ? colors.colory : colors.colorb
+            }),
+            fill: true,
+            backgroundColor: 'rgba(12, 9, 13, .7)',
+            borderColor: colors.colorb
+
+          }
+        ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        elements: {
+          line: {
+            tension: 0.2
+          }
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
+        title: {
+          display: true,
+          text: 'Runs vs Year',
+          fontSize: 18,
+          position: 'bottom',
+          padding: 10
+        }
+      }
+
+
+
+    });
+
 
 
   }

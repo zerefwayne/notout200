@@ -11,6 +11,31 @@
 
   <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
 
+
+    <div fxFlex="55" fxLayoutAlign="center">
+
+      <canvas #runsByYearChart></canvas>
+
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
+
+      <app-stat-two title="Most Runs in a Calendar Year" [value]="1894" direction="right"></app-stat-two>
+      <div style="font-size: 1.7rem; color: #777777; text-align: right;">
+
+        Sachin also holds the record of most number of runs ever scored in a calendar year. He achieved the feat in 1998 where he scored a total of 1894 runs.
+
+      </div>
+
+    </div>
+
+
+
+  </section>
+
+
+  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+
     <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
 
       <app-stat-two title="Career Average" [value]="44.83"></app-stat-two>

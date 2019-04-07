@@ -10,7 +10,7 @@ import {WorldcupComponent} from './screens/worldcup/worldcup.component';
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/overview'},
   {path: 'overview', component: OverviewComponent},
-  {path: 'batting-tormentor', component: BattingComponent},
+  {path: 'batting-wizard', component: BattingComponent},
   {path: 'a-handy-spinner', component: BowlingComponent},
   {path: 'global-phenomenon', component: GlobalComponent},
   {path: 'worldcup-maestro', component: WorldcupComponent}
