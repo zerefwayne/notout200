@@ -30,6 +30,26 @@ export class GlobalComponent implements OnInit {
 
   constructor(private dataService: DataService) { }
 
+  getColor(code: string): string {
+
+      console.log(this.countryData);
+
+      if(code === 'IND'){
+        return 'home';
+      }
+
+      if(this.countryData[code].runs > 1500){
+        return 'g1500';
+      } else if (this.countryData[code].runs < 1500){
+        return 'l1500';
+      } else if (this.countryData[code].runs < 1000){
+        return 'l1000';
+      }
+
+      return 'l500';
+
+  }
+
   ngOnInit() {
 
     this.awayRecord = {
@@ -44,8 +64,75 @@ export class GlobalComponent implements OnInit {
 
     this.innings.forEach((inning: Inning) => {
 
+      if(inning.countryCode !== 'IND') {
+
+        if (this.countryData[inning.countryCode]) {
+
+          this.countryData[inning.countryCode].runs += inning.batting_score;
+
+          if(inning.batting_score >= 100){
+            this.awayRecord.centuries += 1;
+          }
+
+          this.countryData[inning.countryCode].innings += 1;
+
+          if (inning.notout === 1) {
+
+            this.countryData[inning.countryCode].notouts += 1;
+
+          }
+
+          if (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts !== 0) {
+
+            this.countryData[inning.countryCode].average = _.round(this.countryData[inning.countryCode].runs / (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts), 2);
+
+          }
+
+
+        } else {
+
+          this.countryData[inning.countryCode] = {
+            countryName: inning.countryName,
+            runs: 0,
+            innings: 0,
+            notouts: 0,
+            average: 0
+          };
+
+          if (inning.did_not_bat === 0) {
+
+            if(inning.batting_score >= 100){
+              this.awayRecord.centuries += 1;
+            }
+
+            this.countryData[inning.countryCode].runs += inning.batting_score;
+
+            this.countryData[inning.countryCode].innings += 1;
+
+            if (inning.notout === 1) {
+
+              this.countryData[inning.countryCode].notouts += 1;
+
+            }
+
+            if (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts !== 0) {
+
+              this.countryData[inning.countryCode].average = _.round(this.countryData[inning.countryCode].runs / (this.countryData[inning.countryCode].innings - this.countryData[inning.countryCode].notouts), 2);
+
+            }
+
+          }
+
+        }
+
+      }
+
+    });
+
+    this.innings.forEach((inning: Inning) => {
+
       if(this.countryMapFill[inning.countryCode] === undefined){
-        this.countryMapFill[inning.countryCode] = { fillKey: inning.countryCode === 'IND' ? 'home' : 'away', name: inning.countryName };
+        this.countryMapFill[inning.countryCode] = { fillKey: this.getColor(inning.countryCode), name: inning.countryName };
       }
 
     });
@@ -144,8 +231,12 @@ export class GlobalComponent implements OnInit {
       fills: {
         defaultFill: '#CCCCCC',
         authorHasTraveledTo: colors.colory,
-        home: colors.colorp,
-        away: colors.colorb
+        home: colors.colorb,
+        g1500: '#BE943A',
+        l1500: '#E7B446',
+        l1000: '#EDC878',
+        l500: 'F4DCAA',
+
       },data: this.countryMapFill
     });
 
@@ -312,14 +403,7 @@ export class GlobalComponent implements OnInit {
           display: true
         }
       }
-
     });
-
-
-
-
-
-
   }
 
   generateRunWinAwayChart(){
