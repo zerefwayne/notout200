@@ -8,9 +8,9 @@
 </div>
 <section class="section" fxLayout="column" fxLayoutGap="10rem">
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
+    <div fxLayout="column" fxFlex.gt-xs="35" fxLayoutGap="3rem" fxLayoutAlign="center">
 
       <app-stat-two title="Highest Run Scorer" [value]="sachinData.runs"></app-stat-two>
 
@@ -21,7 +21,7 @@
 
     </div>
 
-    <div fxFlex="55" fxLayoutAlign="center">
+    <div fxFlex.gt-xs="55" fxLayoutAlign="center">
 
       <canvas #playersRunChart></canvas>
 
@@ -30,15 +30,15 @@
 
   </section>
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
-    <div fxFlex="55" fxLayoutAlign="center">
+    <div fxLayout="column" fxFlexOrder.xs="2" fxFlex.gt-xs="35" fxLayoutAlign="center">
 
-      <canvas #playersInningChart></canvas>
+    <canvas #playersInningChart></canvas>
 
     </div>
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
+    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxFlexOrder.xs="1" fxLayoutAlign="center">
 
       <app-stat-two title="Most Innings Played" [value]="sachinData.innings" direction="right"></app-stat-two>
 
@@ -53,11 +53,11 @@
 
   </section>
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxLayoutAlign="center">
+    <div fxLayout="column" fxFlex.gt-xs="35" fxLayoutGap="3rem" fxLayoutAlign="center">
 
-      <app-stat-two title="Centuries Scored" [value]="sachinData.centuries"></app-stat-two>
+    <app-stat-two title="Centuries Scored" [value]="sachinData.centuries"></app-stat-two>
 
       <div style="font-size: 1.7rem; color: #777777;">
 
