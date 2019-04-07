@@ -187,7 +187,17 @@ export class GlobalComponent implements OnInit {
         ]
 
 
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Runs by countries he played in',
+          fontSize: 18,
+          position: 'bottom',
+          padding: 10
+        }
       }
+
 
 
 
@@ -245,6 +255,13 @@ export class GlobalComponent implements OnInit {
               beginAtZero: true
             }
           }]
+        },
+        title: {
+          display: true,
+          text: 'Averages by countries he played in',
+          fontSize: 18,
+          position: 'bottom',
+          padding: 10
         }
 
       }
@@ -300,11 +317,6 @@ export class GlobalComponent implements OnInit {
             ]
           }
         ]
-      },
-      options: {
-        legend: {
-          display: true
-        }
       }
     });
   }

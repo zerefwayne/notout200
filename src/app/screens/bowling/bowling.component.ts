@@ -68,6 +68,15 @@ export class BowlingComponent implements OnInit {
 
           }
         ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Wickets taken vs Oppositions',
+          fontSize: 18,
+          position: 'bottom',
+          padding: 30
+        }
       }
 
     });
@@ -108,6 +117,18 @@ export class BowlingComponent implements OnInit {
             backgroundColor: Object.keys(catchesByOpposition).map(opposition => opposition === 'AUSTRALIA' ? colors.colory : colors.colorb)
           }
         ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: 'Catches taken vs Oppositions',
+          fontSize: 18,
+          position: 'bottom',
+          padding: 30
+        }
       }
 
     });
