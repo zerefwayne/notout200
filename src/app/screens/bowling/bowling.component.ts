@@ -1,10 +1,13 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {Inning} from '../../services/inning.model';
 import * as _ from 'lodash';
 import colors from '../../shared/colors.model';
 import Chart from 'chart.js';
 import {del} from 'selenium-webdriver/http';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Observable, Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-bowling',
@@ -16,19 +19,28 @@ export class BowlingComponent implements OnInit {
   @ViewChild('wicketsByOpposition') wicketsChart: ElementRef;
   @ViewChild('catchesChart') catchesChart: ElementRef;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private breakpointObserver: BreakpointObserver) { }
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches)
+    );
+
 
   private innings: Inning[] = [];
   totalWickets: number = 0;
   totalCatches: number = 0;
 
+
   ngOnInit() {
     this.innings = this.dataService.getAllInnings();
     this.generateWicketsChart();
     this.generateCatchesChart();
+
+
   }
 
-  generateWicketsChart() {
+  async generateWicketsChart() {
 
     let wicketsByOpposition = {};
 
@@ -121,13 +133,6 @@ export class BowlingComponent implements OnInit {
       options: {
         legend: {
           display: false
-        },
-        title: {
-          display: true,
-          text: 'Catches taken vs Oppositions',
-          fontSize: 18,
-          position: 'bottom',
-          padding: 30
         }
       }
 

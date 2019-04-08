@@ -199,14 +199,6 @@ export class WorldcupComponent implements OnInit {
       options: {
         legend: {
           display: true
-        },
-        title: {
-          display: true,
-          text: 'Runs in Winning Causes',
-          fontSize: 20,
-          position: 'bottom',
-          padding: 40,
-          fontColor: 'black'
         }
       }
 
@@ -258,14 +250,6 @@ export class WorldcupComponent implements OnInit {
       options: {
         legend: {
           display: true
-        },
-        title: {
-          display: true,
-          text: 'Centuries in Winning Causes',
-          fontSize: 24,
-          position: 'bottom',
-          padding: 40,
-          fontColor: 'black'
         }
       }
 
