@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer fxFlex="0 0 20" fixedInViewport="true"
+  <mat-sidenav #drawer fxFlex.gt-xs="0 0 20" fxFlex.xs="0 0 70" fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
