@@ -9,9 +9,9 @@
 
 <section class="section">
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-around">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
-  <div fxLayout="column" fxLayoutGap="2rem" fxFlex="35" fxLayoutAlign="center">
+    <div fxLayout="column" fxLayout.xs="row" fxFlex.gt-xs="35" fxLayoutGap.gt-xs="3rem" fxLayoutGap.xs="1rem" fxLayoutAlign="center">
 
     <app-stat-two [title]="'Total Innings'" [value]="overall.innings"></app-stat-two>
     <app-stat-two [title]="'Total Runs'" [value]="overall.runs"></app-stat-two>
@@ -19,7 +19,8 @@
 
   </div>
 
-  <div fxFlex="45">
+    <div fxFlex.gt-xs="45" fxLayoutAlign="center">
+
 
     <canvas #overallInningsChart></canvas>
 
@@ -31,19 +32,15 @@
 
 <section class="section">
 
-  <header style="font-size: 4rem; padding: 0 5rem 3rem 5rem;">
-    Impact Player
-  </header>
+    <section class="section--impact" fxLayout="row" fxLayout.xs="column" fxLayoutAlign.gt-xs="space-evenly">
 
-  <section class="section--impact" fxLayout="row" fxLayoutAlign="space-evenly">
-
-    <div fxFlex="40">
+    <div fxFlex.gt-xs="40">
 
       <canvas #runsByResultChart></canvas>
 
     </div>
 
-    <div fxFlex="40">
+    <div fxFlex.gt-xs="40">
 
       <canvas #centuriesByResultChart></canvas>
 

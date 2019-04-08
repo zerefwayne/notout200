@@ -7,21 +7,22 @@
   </p>
 </div>
 
-<section class="section" fxLayout="column" fxLayoutGap="10rem">
+<section class="section" fxLayout="column" fxLayoutGap.xs="5rem" fxLayoutGap="10rem">
 
-  <section class="section--overall" fxLayout="column" fxLayoutAlign="center center">
+    <section fxLayout="column" fxLayoutAlign="center center">
 
-    <div #worldmap style="width: 80%; height: 50rem"></div>
+      <div #worldmap style="width: 80%; height: 50rem"></div>
 
-    <img src="../../../assets/map-legend.png" width="50%" style="margin-top: 5rem;">
+      <img src="../../../assets/map-legend.png" width="50%" style="margin-top: 5rem;">
 
-  </section>
+    </section>
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
-      <app-stat-two title="Total Runs Scored (away)" [value]="awayRecord.runs"></app-stat-two>
+    <div fxLayout="column" fxFlex.gt-xs="35" fxLayoutGap="3rem" fxLayoutAlign="center">
+
+    <app-stat-two title="Total Runs Scored (away)" [value]="awayRecord.runs"></app-stat-two>
 
       <div style="font-size: 1.7rem; color: #777777;">
 
@@ -31,26 +32,26 @@
 
     </div>
 
-    <div fxFlex="55" fxLayoutAlign="center">
+    <div fxFlex.gt-xs="55" fxLayoutAlign="center">
 
-      <canvas #countryWiseChart></canvas>
+    <canvas #countryWiseChart></canvas>
 
     </div>
 
 
   </section>
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
-    <div fxFlex="55" fxLayoutAlign="center">
+    <div fxLayout="column" fxFlexOrder.xs="2" fxFlex.gt-xs="55" fxLayoutAlign="center">
 
-      <canvas #countryAverageChart></canvas>
+    <canvas #countryAverageChart></canvas>
 
     </div>
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35">
+    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35" fxFlexOrder.xs="1" fxLayoutAlign="center">
 
-      <app-stat-two title="Away Average" [value]="awayRecord.average" direction="right"></app-stat-two>
+    <app-stat-two title="Away Average" [value]="awayRecord.average" direction="right"></app-stat-two>
 
       <div style="font-size: 1.7rem; text-align: right; color: #777777;">
 
@@ -62,11 +63,11 @@
 
   </section>
 
-  <section class="section--overall" fxLayout="row" fxLayoutAlign="space-between">
+  <section class="section--overall" fxLayout.xs="column" fxLayoutGap="3rem" fxLayoutAlign.gt-xs="space-between" fxLayoutAlign="center stretch">
 
-    <div fxLayout="column" fxLayoutGap="3rem" fxFlex="35">
+    <div fxLayout="column" fxFlex.gt-xs="35" fxLayoutGap="3rem" fxLayoutAlign="center">
 
-      <app-stat-two title="Away Centuries" [value]="awayRecord.centuries"></app-stat-two>
+    <app-stat-two title="Away Centuries" [value]="awayRecord.centuries"></app-stat-two>
 
       <div style="font-size: 1.7rem; color: #777777;">
 

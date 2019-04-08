@@ -25,6 +25,7 @@ export class GlobalComponent implements OnInit {
   private innings: Inning[] = [];
   private countryMapFill: {} = {};
   private countryData: {} = {};
+  public mobileView = false;
   awayRecord: {runs: number, innings: number, notouts: number, average: number, centuries: number};
 
 
@@ -59,6 +60,10 @@ export class GlobalComponent implements OnInit {
       average: 0,
       centuries: 0
     };
+
+    if(window.screen.width > 700){
+      this.mobileView = true;
+    }
 
     this.innings = this.dataService.getAllInnings();
 
